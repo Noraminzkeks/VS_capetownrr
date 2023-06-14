@@ -1,4 +1,7 @@
+import 'package:caperr/welcome.dart';
 import 'package:flutter/material.dart';
+
+import 'loading.dart';
 
 
 const List<String> list = <String>['Deutsch', 'Englisch', 'Afrikans'];
@@ -186,6 +189,7 @@ class _SettingsState extends State<Settings> {
                           ),
                         );
                       },
+
                       icon: const Icon(
                         Icons.logout,
                         color: Color(0xfff3b7bc),

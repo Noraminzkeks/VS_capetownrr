@@ -1,3 +1,4 @@
+import 'package:caperr/loading.dart';
 import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         ),
 
-      home: const MyHomePage(title: 'Cape Town Rent & Ride'),
+      home: Loading(),
     );
   }
 }
