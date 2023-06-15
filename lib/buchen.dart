@@ -1,7 +1,6 @@
-import 'package:caperr/home.dart';
-import 'package:caperr/main.dart';
+import 'home.dart';
+import 'main.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'buchen.dart';
 import 'dropdown.dart';
 import 'index.dart';

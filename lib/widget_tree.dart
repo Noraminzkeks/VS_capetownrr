@@ -1,5 +1,4 @@
-import 'package:caperr/home.dart';
-
+import 'home.dart';
 import 'auth.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';

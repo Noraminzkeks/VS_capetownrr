@@ -1,6 +1,6 @@
-import 'package:caperr/bokaap.dart';
-import 'package:caperr/main.dart';
-import 'package:caperr/peninsula.dart';
+import 'bokaap.dart';
+import 'main.dart';
+import 'peninsula.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'simonstown.dart';

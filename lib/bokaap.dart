@@ -1,4 +1,4 @@
-import 'package:caperr/main.dart';
+import 'main.dart';
 import 'register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
