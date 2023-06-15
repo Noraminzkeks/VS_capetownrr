@@ -1,38 +1,17 @@
 import 'package:caperr/main.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
+class RegisterClass extends StatefulWidget {
+  const RegisterClass({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  @override
+  State<RegisterClass> createState() => _RegisterClassState();
+}
+class _RegisterClassState extends State<RegisterClass> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cape Town Rent & Ride',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3B7BC)),
-        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
-        useMaterial3: true,
-      ),
-      home: const LoginClass (title: 'Cape Town Rent & Ride'),
-    );
-  }
-}
-
-
-class LoginClass extends StatefulWidget {
-  const LoginClass({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<LoginClass> createState() => _LoginClassState();
-}
-class _LoginClassState extends State<LoginClass> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+      return Scaffold(
         appBar: AppBar
           (
             backgroundColor: const Color(0xFFF3B7BC),
@@ -43,11 +22,12 @@ class _LoginClassState extends State<LoginClass> {
               children:
               [
                 Image.asset('assets/images/CapeTownRentRide.jpg',fit: BoxFit.contain,height: 30,),
-                Container(padding: const EdgeInsets.all(20.0), child: Text('Cape Town Rent & Ride', style: TextStyle(fontFamily: 'Roboto'),))
+                Container(padding: const EdgeInsets.all(20.0), child: Text('Cape Town Rent & Ride', style: TextStyle(fontFamily: 'Roboto', color: Colors.black)))
               ],
             )
         ),
         body:  Center(
+          child: SingleChildScrollView(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -106,9 +86,9 @@ class _LoginClassState extends State<LoginClass> {
                 ]
             )
         ),
-      ),
+        ),
     );
   }
 }
 
-void main() => runApp(const LoginClass(title: 'Cape Town Rent & Ride'));
+
