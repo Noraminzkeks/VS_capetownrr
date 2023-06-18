@@ -1,3 +1,4 @@
+import 'package:caperr/contact.dart';
 import 'package:caperr/loading.dart';
 import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   textAlign: TextAlign.center,),
                     const SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed: () { },
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ContactClass()),
+                        );
+                      },
                       child: Text('Jetzt buchen'),
                       style: ElevatedButton.styleFrom(
                           foregroundColor: const Color(0xFFFFFFFF),
