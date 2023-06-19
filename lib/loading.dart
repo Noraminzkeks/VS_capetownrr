@@ -13,7 +13,7 @@ class _LoadingState extends State<Loading> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => Test()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => Welcome()));
     });
   }
 

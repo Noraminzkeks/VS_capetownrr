@@ -1,16 +1,17 @@
 import 'package:caperr/main.dart';
 import 'package:caperr/settings.dart';
+import 'package:caperr/test.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
 
-class Test extends StatefulWidget {
-  const Test({Key? key}) : super(key: key);
+class Welcome extends StatefulWidget {
+  const Welcome({Key? key}) : super(key: key);
 
   @override
-  State<Test> createState() => _TestState();
+  State<Welcome> createState() => _WelcomeState();
 }
 
-class _TestState extends State<Test> {
+class _WelcomeState extends State<Welcome> {
   late Material materialButton;
   late int index;
   final onboardingPagesList = [
