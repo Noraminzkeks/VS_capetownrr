@@ -83,20 +83,6 @@ class _SettingsState extends State<Settings> {
           ),
         ),
         leading: Image.asset('assets/images/CapeTownRentRide.jpg',fit: BoxFit.contain,height: 30),
-
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.question_mark_outlined, color: Colors.white),
-            onPressed: () {showDialog(context: context, builder: (context) => AlertDialog(
-                title: Text('Hilfe'),
-                content: Text('Hier kannst du grundlegende Einstellungen ändern!'),
-                actions: [
-                  TextButton(onPressed: () => Navigator.pop(context), child: Text('OK')),]
-            ),
-            );
-            },
-          ),
-        ],
       ),
 
         body: SingleChildScrollView(
@@ -104,103 +90,225 @@ class _SettingsState extends State<Settings> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
-              const SizedBox(height:25),
-
               Card(
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.language,
-                      color: Color(0xfff3b7bc),
-                    ),
-                    Text('  Select Language'),
-                    Spacer(),
-                    DropdownButtonExample(),
+                child: Padding(
+                padding: EdgeInsets.all(20.0),
+                 child: Column(
+                   children: <Widget>[
+
+                   Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+
+                       //Überschrift
+                       Icon(Icons.manage_accounts_outlined, color: Color(0xFFF3B7BC)),
+
+                       Text('Account',
+                         style: TextStyle(
+                           fontSize: 20,
+                         ),
+                       ),
+                      ],
+                   ),
+
+                  //Sprachauswahl
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.language,
+                        color: Color(0xfff3b7bc),
+                      ),
+                      Text('  Sprache auswählen:'),
+                      Spacer(),
+                      DropdownButtonExample(),
+                    ],
+                  ),
+
+                     //Passwort ändern
+                     Row(
+                       children: <Widget>[
+
+                         Icon(
+                           Icons.key,
+                           color: Color(0xfff3b7bc),
+                         ),
+                         Text('  Passwort ändern:'),
+
+                         Spacer(),
+
+                         ElevatedButton(
+
+                           style: const ButtonStyle(
+                             backgroundColor: MaterialStatePropertyAll(Color(0xfff3b7bc)
+                             ),
+                           ),
+
+                           onPressed: (){
+                             showDialog(
+                               context: context,
+                               builder: (BuildContext context) => AlertDialog(
+                                 title: const Text('Passwort ändern'),
+                                 content: const TextField(
+                                   obscureText: true,
+                                   decoration: InputDecoration(
+                                     border: OutlineInputBorder(),
+                                     labelText: 'Neues Passwort',
+                                   ),
+                                 ),
+
+                                 actions: <Widget>[
+                                   TextButton(
+                                     onPressed: () => Navigator.pop(context, 'Abbrechen'),
+                                     child: const Text('Abbrechen'),
+                                   ),
+                                   TextButton(
+                                     onPressed: () => Navigator.pop(context, 'OK'),
+                                     child: const Text('OK'),
+                                   ),
+                                 ],
+                               ),
+                             );
+                           },
+                           child: Text('Passwort ändern'),
+                         ),
+                       ],
+                     ),
+
                   ],
                 ),
               ),
+              ),
 
               Card(
-                child: Row(
-                  children: <Widget>[
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    children: <Widget>[
 
-                    Icon(
-                      Icons.key,
-                      color: Color(0xfff3b7bc),
-                    ),
-                    Text('  Passwort ändern:'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
 
-                    Spacer(),
+                          //Überschrift
+                          Icon(Icons.info_outline, color: Color(0xFFF3B7BC)),
 
-                    ElevatedButton(
-
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Color(0xfff3b7bc)
-                        ),
+                          Text('Mehr Informationen und Support',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
 
-                      onPressed: (){
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Passwort ändern'),
-                            content: const TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Neues Passwort',
-                              ),
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                      //Hilfe
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.question_mark,
+                            color: Color(0xfff3b7bc),
+                          ),
+                          Text('  Hilfe'),
+
+                          Spacer(),
+
+                          ElevatedButton(
+                          style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(Color(0xfff3b7bc)),
+                          ),
+
+                          onPressed: (){
+                            showDialog(context: context, builder: (context) => AlertDialog(
+                              title: Text('Hilfe'),
+                              content: Text('Hier kannst du grundlegende Einstellungen ändern!'),
+                              actions: [
+                                TextButton(onPressed: () => Navigator.pop(context), child: Text('OK')),]
+                            ),
+                            );
+                            },
+                            child: Text('Hilfe'),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      //Über
+                      Row(
+                        children: <Widget>[
+
+                          Icon(
+                            Icons.info_outline,
+                            color: Color(0xfff3b7bc),
+                          ),
+                          Text('  Über'),
+
+                          Spacer(),
+
+                          ElevatedButton(
+                            style: const ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(Color(0xfff3b7bc)),
                             ),
 
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'Abbrechen'),
-                                child: const Text('Abbrechen'),
+                            onPressed: (){
+                              showDialog(context: context, builder: (context) => AlertDialog(
+                                  title: Text('Über'),
+                                  content: Text(
+                                      'Anbieter:\nCape Town Rent & Ride\nRondebosch, Cape Town,\n7700, South Africa\n\nKontakt:\nTelefon: +27 123 45678\nEmail: info@capetownrr.za\n\nVerantwortliche:\nVictoria Lahr und Nora Kuzminskas'
+                                  ),
+                                  actions: [
+                                    TextButton(onPressed: () => Navigator.pop(context), child: Text('OK')),]
                               ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
+                              );
+                            },
+                            child: Text('Über'),
                           ),
-                        );
-                      },
-                      child: Text('Passwort ändern'),
-                    ),
-                  ],
+
+                        ],
+                      ),
+
+                    ],
+                  ),
                 ),
               ),
 
+              Card(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
 
+                    Icon(Icons.favorite, color: Color(0xfff3b7bc)),
 
-                    ElevatedButton.icon(   // <-- ElevatedButton
-                      onPressed: () {
-
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Erfolgreich ausgeloggt.'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'Erfolgreich ausgeloggt.'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Color(0xfff3b7bc),
-                        size: 24.0,
-                      ),
-                      label: const Text('Ausloggen'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        minimumSize: const Size(175, 60),
+                    Text('Empfehle uns weiter!',
+                      style: TextStyle(
+                        fontSize: 20,
                       ),
                     ),
+
+                    SizedBox(
+                      width: 25,
+                    ),
+
+                    ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Color(0xfff3b7bc)),
+                      ),
+
+                      onPressed: (){},
+                      child: Text('Weiterempfehlen'),
+                    ),
+
+                    ],
+                  ),
+                ),
+              ),
 
                   ],
           ),

@@ -61,7 +61,6 @@ class ContactClass extends StatefulWidget {
 
                 Text('Vielen Dank für dein Interesse an Cape Town Rent & Ride! Bei weiteren Fragen oder Anregungen. kannst du uns unter folgenden Wegen erreichen. Wir werden uns schnellstmöglich bei dir melden!', textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFFF3B7BC),
                     fontSize: 15,
                   ),
                 ),
@@ -145,7 +144,7 @@ class ContactClass extends StatefulWidget {
                                 Icon(Icons.contact_mail_outlined, color: Color(0xFFF3B7BC)),
 
                                 SizedBox(
-                                  width: 10,
+                                  width: 8,
                                 ),
 
                                 Text('Allgemeine Anfragen',
@@ -170,7 +169,7 @@ class ContactClass extends StatefulWidget {
                             ),
 
                             SizedBox(
-                              height: 25,
+                              height: 15,
                             ),
 
                             ElevatedButton.icon(
@@ -249,19 +248,8 @@ class ContactClass extends StatefulWidget {
                 ),
 
                 SizedBox(
-                  width: 25,
+                  height: 25,
                 ),
-
-                Text('Hier findest du uns!',
-                  style: TextStyle(
-                    color: Color(0xFFF3B7BC),
-                    fontSize: 15,
-                  ),
-                ),
-
-            SizedBox(
-              height: 25,
-            ),
 
                 Expanded(
                   child: MapClass(),
@@ -270,13 +258,32 @@ class ContactClass extends StatefulWidget {
                 Card(
                   child: Padding(
                     padding: EdgeInsets.all(20.0),
-                  child: Text('Rondebosch, Cape Town,\n 7700, South Africa',
-                    style: TextStyle(
-                      color: Color(0xFFF3B7BC),
-                      fontSize: 15,
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+
+                        Icon(Icons.location_on_outlined, size: 30),
+
+                        Text('Hier findest du uns!',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+
+                        SizedBox(
+                          width: 25,
+                        ),
+
+                        Text('Rondebosch, Cape Town,\n 7700, South Africa', textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  ),
+
                 ),
 
               ],

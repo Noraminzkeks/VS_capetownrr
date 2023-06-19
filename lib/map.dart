@@ -21,8 +21,8 @@ class _MapClassState extends State<MapClass> {
 
         return FlutterMap(
           options: MapOptions(
-            center: LatLng(-34, 18),
-            zoom: 15,
+            center: LatLng(-34, 18.5),
+            zoom: 10,
           ),
           nonRotatedChildren: [
             Positioned(
