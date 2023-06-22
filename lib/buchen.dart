@@ -422,10 +422,18 @@ class _BuchenClassState extends State<BuchenClass> {
               height: 50,
               width: 250,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(builder: (context) => Index())
+                onPressed: () {showDialog(context: context, builder: (context) => AlertDialog(
+                      title: Text('Buchung erfolgreich!'),
+                      content: Text('Mehr Infos du deiner Buchung erhälst du per Email.'),
+                      actions: [
+                        TextButton(onPressed: (){
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(builder: (context) => Index())
+                        );
+                        },
+                            child: Text('Zurück zum Home-Screen')),]
+                  ),
                   );
                   _MyDropdownMenuState().decreaseCounter();
                 },
