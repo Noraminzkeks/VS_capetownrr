@@ -1,10 +1,12 @@
 import 'package:caperr/home.dart';
 import 'package:caperr/main.dart';
+import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'buchen.dart';
 import 'dropdown.dart';
 import 'index.dart';
+
 
 List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> list = [
@@ -219,13 +221,25 @@ class _BuchenKaapClassState extends State<BuchenKaapClass> {
                 height: 30,
               ),
               Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
                     'Cape Town Rent & Ride',
-                    style: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ))
             ],
-          )),
+          ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Settings()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

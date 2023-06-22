@@ -1,3 +1,5 @@
+import 'package:caperr/settings.dart';
+
 import 'home.dart';
 import 'main.dart';
 import 'package:flutter/material.dart';
@@ -219,13 +221,25 @@ class _BuchenSimClassState extends State<BuchenSimClass> {
                 height: 30,
               ),
               Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
                     'Cape Town Rent & Ride',
-                    style: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ))
             ],
-          )),
+          ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Settings()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

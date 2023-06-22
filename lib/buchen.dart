@@ -1,88 +1,174 @@
-import 'home.dart';
-import 'main.dart';
+import 'package:caperr/home.dart';
+import 'package:caperr/main.dart';
+import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 import 'buchen.dart';
-import 'dropdown.dart';
 import 'index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-List<DropdownMenuItem<String>> get dropdownItems {
-  List<DropdownMenuItem<String>> list = [
-    DropdownMenuItem(
-        child: Container(
-          padding: const EdgeInsets.all(5),
-          width: 300,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                Icons.date_range_outlined,
-                color: Colors.black,
-                size: 25.0,
-                semanticLabel: 'Date',
-              ),
-              Text('  Datum auswählen '),
-            ],
-          ),
-        ),
-        value: "1"),
-    DropdownMenuItem(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('21.07.2023'),
-            Text('  Noch 3 Plätze verfügbar '),
-          ],
-        ),
-        value: "2"),
-    DropdownMenuItem(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('25.07.2023'),
-            Text('  Noch 12 Plätze verfügbar '),
-          ],
-        ),
-        value: "3"),
-    DropdownMenuItem(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('30.07.2023'),
-            Text('  Noch 15 Plätze verfügbar '),
-          ],
-        ),
-        value: "4"),
-  ];
-  return list;
+class MyDropdownMenu extends StatefulWidget {
+  @override
+  _MyDropdownMenuState createState() => _MyDropdownMenuState();
 }
 
-class DropdownButtonExample extends StatefulWidget {
-  const DropdownButtonExample({super.key});
+class _MyDropdownMenuState extends State<MyDropdownMenu> {
+  int counter1 = 15;
+  int counter2 = 12;
+  int counter3 = 5;
+  int counter = 0;
+  List<String> options = [
+    'Datum auswählen', '30.07.2023', '03.07.2023', '15.07.2023'];
+  int selectedValue1 = 0;
 
   @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
-}
+  void initState() {
+    super.initState();
+    loadCounter1();
+    loadCounter2();
+    loadCounter3();
+  }
 
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String selectedValue = "1";
+  Future<void> loadSelectedValue1() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedValue1 = prefs.getInt('selectedValue1') ?? 0;
+    });
+  }
+
+  Future<void> loadCounter1() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter1 = prefs.getInt('counter1') ?? 15;
+    });
+  }
+  Future<void> loadCounter2() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter2 = prefs.getInt('counter2') ?? 12;
+    });
+  }
+  Future<void> loadCounter3() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter3 = prefs.getInt('counter3') ?? 5;
+    });
+  }
+
+  Future<void> saveselectedValue1(int value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedValue1 = value;
+      prefs.setInt('selectedValue1', value);
+    });
+  }
+
+  Future<void> saveCounter1(int value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter1 = value;
+      prefs.setInt('counter1', value);
+    });
+  }
+  Future<void> saveCounter2(int value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter2 = value;
+      prefs.setInt('counter2', value);
+    });
+  }
+  Future<void> saveCounter3(int value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter3 = value;
+      prefs.setInt('counter3', value);
+    });
+  }
+
+  Future<void> decreaseCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    selectedValue1 = prefs.getInt('selectedValue1') ?? 0;
+    if(selectedValue1==1){
+      int counter1 = prefs.getInt('counter1') ?? 0;
+      counter1 -= 1;
+      prefs.setInt('counter1', counter1);
+      setState(() {
+        this.counter1 = counter1;
+      });
+      saveCounter1(counter1);
+    }
+    else if(selectedValue1==2){
+      int counter2 = prefs.getInt('counter2') ?? 0;
+      counter2 -= 1;
+      prefs.setInt('counter2', counter2);
+      setState(() {
+        this.counter2 = counter2;
+      });
+      saveCounter2(counter2);
+    }
+    else{
+      int counter3 = prefs.getInt('counter3') ?? 0;
+      counter3 -= 1;
+      prefs.setInt('counter3', counter3);
+      setState(() {
+        this.counter3 = counter3;
+      });
+      saveCounter3(counter3);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: selectedValue,
+    return DropdownButton<int>(
+      value: selectedValue1,
       icon: const Icon(
         Icons.arrow_downward,
         color: Color(0xfff3b7bc),
       ),
-      onChanged: (String? newValue) {
+      items: options.map((String option) {
+        if(options.indexOf(option)==0){
+          return DropdownMenuItem<int>(
+            value: options.indexOf(option),
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              width: 300,
+              child: Row(
+                children: [
+                  Text(option),
+                ],
+              ),
+            ),
+          );
+        }
+        if(options.indexOf(option)==1){
+          counter = counter1;
+        }
+        else if(options.indexOf(option)==2){
+          counter = counter2;
+        }
+        else{
+          counter = counter3;
+        }
+        return DropdownMenuItem<int>(
+          value: options.indexOf(option),
+          child: Row(
+            children: [
+              Text(option),
+              Text('  Plätze verfügbar: $counter'),
+            ],
+          ),
+        );
+      }).toList(),
+      onChanged: (int? newValue) {
         setState(() {
-          selectedValue = newValue!;
+          selectedValue1 = newValue!;
+          saveselectedValue1(newValue! as int);
         });
       },
-      items: dropdownItems,
     );
   }
 }
+
 
 List<DropdownMenuItem<String>> get dropdownBikes {
   List<DropdownMenuItem<String>> listbike = [
@@ -120,7 +206,7 @@ class DropdownButtonBike extends StatefulWidget {
 }
 
 class _DropdownButtonBikeState extends State<DropdownButtonBike> {
-  String selectedValue2 = "eins";
+  static String selectedValue2 = "eins";
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +262,7 @@ class DropdownButtonKids extends StatefulWidget {
 }
 
 class _DropdownButtonKidsState extends State<DropdownButtonKids> {
-  String selectedValue3 = "eins";
+  static String selectedValue3 = "eins";
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +290,7 @@ class BuchenClass extends StatefulWidget {
 }
 
 class _BuchenClassState extends State<BuchenClass> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -218,13 +305,25 @@ class _BuchenClassState extends State<BuchenClass> {
                 height: 30,
               ),
               Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
                     'Cape Town Rent & Ride',
-                    style: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ))
             ],
-          )),
+          ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Settings()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -274,7 +373,7 @@ class _BuchenClassState extends State<BuchenClass> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+                    const EdgeInsets.only(left: 15, top: 10, bottom: 10),
                     child: Text('Dein Guide: Vicky',
                         style: TextStyle(
                             fontFamily: 'Roboto',
@@ -294,7 +393,7 @@ class _BuchenClassState extends State<BuchenClass> {
               decoration: BoxDecoration(
                   color: const Color(0x00000000),
                   border: Border.all(color: const Color(0x00000000))),
-              child: DropdownButtonExample(),
+              child: MyDropdownMenu(),
             ),
             Container(
               padding: const EdgeInsets.only(bottom: 10),
@@ -319,22 +418,23 @@ class _BuchenClassState extends State<BuchenClass> {
                   color: Colors.black54,
                   fontSize: 10)),
             ),
-      SizedBox(
-        height: 50,
-        width: 250,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    new MaterialPageRoute(builder: (context) => Index())
-                );
-              },
-              child: Text('Buchung abschließen'),
-              style: ElevatedButton.styleFrom(
-                  foregroundColor: const Color(0xFFFFFFFF),
-                  backgroundColor: const Color(0xFFF3B7BC)),
+            SizedBox(
+              height: 50,
+              width: 250,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(builder: (context) => Index())
+                  );
+                  _MyDropdownMenuState().decreaseCounter();
+                },
+                child: Text('Buchung abschließen'),
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: const Color(0xFFFFFFFF),
+                    backgroundColor: const Color(0xFFF3B7BC)),
+              ),
             ),
-      ),
           ],
         ),
       ),

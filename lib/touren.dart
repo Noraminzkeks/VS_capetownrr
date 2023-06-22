@@ -1,3 +1,5 @@
+import 'package:caperr/settings.dart';
+
 import 'bokaap.dart';
 import 'main.dart';
 import 'peninsula.dart';
@@ -17,23 +19,37 @@ class _TourenClassState extends State<TourenClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color(0xFFF3B7BC),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                'assets/images/CapeTownRentRide.jpg',
-                fit: BoxFit.contain,
-                height: 30,
-              ),
-              Container(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'Cape Town Rent & Ride',
-                    style: TextStyle(fontFamily: 'Roboto', color: Colors.black),
-                  ))
-            ],
-          )),
+        backgroundColor: const Color(0xFFF3B7BC),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/CapeTownRentRide.jpg',
+              fit: BoxFit.contain,
+              height: 30,
+            ),
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                child: Text('Cape Town Rent & Ride',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+            )
+          ],
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Settings()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
