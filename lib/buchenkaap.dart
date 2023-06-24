@@ -4,10 +4,9 @@ import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'buchen.dart';
-import 'dropdown.dart';
 import 'index.dart';
 
-
+//Initalisierung der Drop Down Listen
 List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> list = [
     DropdownMenuItem(
@@ -33,7 +32,6 @@ List<DropdownMenuItem<String>> get dropdownItems {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('23.07.2023'),
-            Text('  Noch 7 Plätze verfügbar '),
           ],
         ),
         value: "2"),
@@ -42,7 +40,6 @@ List<DropdownMenuItem<String>> get dropdownItems {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('28.07.2023'),
-            Text('  Noch 16 Plätze verfügbar '),
           ],
         ),
         value: "3"),
@@ -51,7 +48,6 @@ List<DropdownMenuItem<String>> get dropdownItems {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('01.08.2023'),
-            Text('  Noch 10 Plätze verfügbar '),
           ],
         ),
         value: "4"),
@@ -65,7 +61,7 @@ class DropdownButtonExample extends StatefulWidget {
   @override
   State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
 }
-
+//Der sichbare Wert im Drop-Down-Menü
 class _DropdownButtonExampleState extends State<DropdownButtonExample> {
   String selectedValue = "1";
 
@@ -87,6 +83,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
   }
 }
 
+//Drop-Down-Menü Anzahl Bikes
 List<DropdownMenuItem<String>> get dropdownBikes {
   List<DropdownMenuItem<String>> listbike = [
     DropdownMenuItem(
@@ -143,6 +140,7 @@ class _DropdownButtonBikeState extends State<DropdownButtonBike> {
   }
 }
 
+//Drop-Down-Menü Anzahl Kids-Bikes
 List<DropdownMenuItem<String>> get dropdownKids {
   List<DropdownMenuItem<String>> listKids = [
     DropdownMenuItem(
@@ -240,6 +238,8 @@ class _BuchenKaapClassState extends State<BuchenKaapClass> {
           ),
         ],
       ),
+
+      //SingleChildScrollView also scrollable
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -281,7 +281,7 @@ class _BuchenKaapClassState extends State<BuchenKaapClass> {
                     width: 60.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/Nora.JPG'),
+                        image: AssetImage('assets/images/noraa.jpeg'),
                         fit: BoxFit.fill,
                       ),
                       shape: BoxShape.circle,
@@ -309,6 +309,7 @@ class _BuchenKaapClassState extends State<BuchenKaapClass> {
               decoration: BoxDecoration(
                   color: const Color(0x00000000),
                   border: Border.all(color: const Color(0x00000000))),
+              //Einbinden der Dop-Down-Klassen
               child: DropdownButtonExample(),
             ),
             Container(
@@ -316,12 +317,14 @@ class _BuchenKaapClassState extends State<BuchenKaapClass> {
               decoration: BoxDecoration(
                   color: const Color(0x00000000),
                   border: Border.all(color: const Color(0x00000000))),
+              //Einbinden der Dop-Down-Klassen
               child: DropdownButtonBike(),
             ),
             Container(
               decoration: BoxDecoration(
                   color: const Color(0x00000000),
                   border: Border.all(color: const Color(0x00000000))),
+              //Einbinden der Dop-Down-Klassen
               child: DropdownButtonKids(),
             ),
             Container(
@@ -339,9 +342,23 @@ class _BuchenKaapClassState extends State<BuchenKaapClass> {
               width: 250,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(builder: (context) => Index())
+                  showDialog(
+                    context: context,
+                    //Pop-Up
+                    builder: (context) => AlertDialog(
+                        title: Text('Buchung erfolgreich!'),
+                        content: Text('Mehr Infos du deiner Buchung erhälst du per Email.'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Index()),
+                                );
+                              },
+                              child: Text('Zurück zum Home-Screen')),
+                        ]),
                   );
                 },
                 child: Text('Buchung abschließen'),

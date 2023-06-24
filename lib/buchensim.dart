@@ -1,11 +1,9 @@
 import 'package:caperr/settings.dart';
-
 import 'home.dart';
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'buchen.dart';
-import 'dropdown.dart';
 import 'index.dart';
 
 List<DropdownMenuItem<String>> get dropdownItems {
@@ -33,7 +31,6 @@ List<DropdownMenuItem<String>> get dropdownItems {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('21.07.2023'),
-            Text('  Noch 3 Plätze verfügbar '),
           ],
         ),
         value: "2"),
@@ -42,7 +39,6 @@ List<DropdownMenuItem<String>> get dropdownItems {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('25.07.2023'),
-            Text('  Noch 12 Plätze verfügbar '),
           ],
         ),
         value: "3"),
@@ -51,7 +47,6 @@ List<DropdownMenuItem<String>> get dropdownItems {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('30.07.2023'),
-            Text('  Noch 15 Plätze verfügbar '),
           ],
         ),
         value: "4"),
@@ -211,23 +206,23 @@ class _BuchenSimClassState extends State<BuchenSimClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color(0xFFF3B7BC),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                'assets/images/CapeTownRentRide.jpg',
-                fit: BoxFit.contain,
-                height: 30,
-              ),
-              Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    'Cape Town Rent & Ride',
-                    style: TextStyle(color: Colors.white),
-                  ))
-            ],
-          ),
+        backgroundColor: const Color(0xFFF3B7BC),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/CapeTownRentRide.jpg',
+              fit: BoxFit.contain,
+              height: 30,
+            ),
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Cape Town Rent & Ride',
+                  style: TextStyle(color: Colors.white),
+                ))
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
@@ -289,7 +284,7 @@ class _BuchenSimClassState extends State<BuchenSimClass> {
                   ),
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+                        const EdgeInsets.only(left: 15, top: 10, bottom: 10),
                     child: Text('Dein Guide: Vicky',
                         style: TextStyle(
                             fontFamily: 'Roboto',
@@ -329,19 +324,36 @@ class _BuchenSimClassState extends State<BuchenSimClass> {
               decoration: BoxDecoration(
                   color: const Color(0x00000000),
                   border: Border.all(color: const Color(0x00000000))),
-              child: Text('Die Grundgebühr für diesen Kurs beträgt 60€ pro Person und beinhaltet die geführte Tour sowie die Leihgebühr eines E-Bikes inklusive Helm. Die Tour kann bis zu 48 Stunden vorher kostenfrei storniert werden. Kann die Tour aufgrund von Wetter oder Verkehr nicht stattfinden, werden wir dich telefonisch informieren. Wir freuen uns auf dich!', style: TextStyle(
-                  fontFamily: 'Roboto',
-                  color: Colors.black54,
-                  fontSize: 10)),
+              child: Text(
+                  'Die Grundgebühr für diesen Kurs beträgt 60€ pro Person und beinhaltet die geführte Tour sowie die Leihgebühr eines E-Bikes inklusive Helm. Die Tour kann bis zu 48 Stunden vorher kostenfrei storniert werden. Kann die Tour aufgrund von Wetter oder Verkehr nicht stattfinden, werden wir dich telefonisch informieren. Wir freuen uns auf dich!',
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      color: Colors.black54,
+                      fontSize: 10)),
             ),
             SizedBox(
               height: 50,
               width: 250,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(builder: (context) => Index())
+                  showDialog(
+                    context: context,
+                    //Pop-Up
+                    builder: (context) => AlertDialog(
+                        title: Text('Buchung erfolgreich!'),
+                        content: Text(
+                            'Mehr Infos du deiner Buchung erhälst du per Email.'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Index()),
+                                );
+                              },
+                              child: Text('Zurück zum Home-Screen')),
+                        ]),
                   );
                 },
                 child: Text('Buchung abschließen'),

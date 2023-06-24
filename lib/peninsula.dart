@@ -1,11 +1,8 @@
-import 'package:caperr/buchen.dart';
-import 'package:caperr/main.dart';
 import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-
 import 'buchenpen.dart';
-import 'buchenpeninsula.dart';
+
 
 class PeninsulaClass extends StatefulWidget {
   const PeninsulaClass({super.key});
@@ -215,7 +212,7 @@ class _PeninsulaClassState extends State<PeninsulaClass> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const FetchData()),
+                          builder: (context) => const BuchenPenClass()),
                     );
                   },
                   child: Text(

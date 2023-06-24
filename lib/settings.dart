@@ -1,4 +1,8 @@
+import 'package:caperr/givRez.dart';
 import 'package:flutter/material.dart';
+
+import 'home.dart';
+import 'index.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -48,6 +52,17 @@ class _SettingsState extends State<Settings> {
             ),
           ],
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Index()),
+              );
+            },
+          ),
+        ],
       ),
 
       body: SingleChildScrollView(
@@ -162,7 +177,7 @@ class _SettingsState extends State<Settings> {
 
                     Icon(Icons.favorite, color: Color(0xfff3b7bc)),
 
-                    Text('Empfehle uns weiter!',
+                    Text('Gib uns Feedback!',
                       style: TextStyle(
                         fontSize: 15,
                       ),
@@ -176,9 +191,13 @@ class _SettingsState extends State<Settings> {
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Color(0xfff3b7bc)),
                       ),
-
-                      onPressed: (){},
-                      child: Text('Weiterempfehlen'),
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => InsertData()),
+                        );
+                      },
+                      child: Text('Rezension schreiben'),
                     ),
 
                   ],

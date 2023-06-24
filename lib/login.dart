@@ -1,8 +1,6 @@
-import 'package:caperr/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'auth.dart';
-import 'home.dart';
 import 'index.dart';
 
 class LoginClass extends StatefulWidget {
@@ -14,22 +12,28 @@ class LoginClass extends StatefulWidget {
 
 class _LoginClassState extends State<LoginClass> {
   String? errorMessage = '';
+
+  //Hiermit wird später abgeprüft ob Login oder Registrierung stattfinden soll
   bool isLogin = true;
 
+  //Initialisierung der Textfeld-Controller
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
+  //Login-Funktion
   Future<void> signInWithEmailAndPassword() async {
     try {
+      //Aufruf der Methode signIn aus Auth.dart mit den Parametern aus den Controllern
       await Auth().signInWithEmailAndPassword(
         email: _controllerEmail.text,
         password: _controllerPassword.text,
       );
-
+      //Wenn erfolgreich, wird auf die HomeSeite weitergeleitet
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Index()),
       );
+      //wenn nicht werden die vorgegeben Fehlermeldungen ausgegeben
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -37,12 +41,20 @@ class _LoginClassState extends State<LoginClass> {
     }
   }
 
+  //Registrierungsfunktion
   Future<void> createUserWithEmailAndPassword() async {
     try {
+      //Aufruf der Methode createUser aus Auth.dart mit den Parametern email und passwort
       await Auth().createUserWithEmailAndPassword(
         email: _controllerEmail.text,
         password: _controllerPassword.text,
       );
+      //Bei Erfolg wird auf die Home-Seite weitergeleitet
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Index()),
+      );
+      //Sonst Ausgabe der Fehlermeldung
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -50,10 +62,7 @@ class _LoginClassState extends State<LoginClass> {
     }
   }
 
-  Widget _title() {
-    return const Text('Firebase Auth');
-  }
-
+  //Styling für Eingabefeld "Mail"
   Widget _mailentryField(String title, TextEditingController controller) {
     return TextField(
       controller: controller,
@@ -63,9 +72,11 @@ class _LoginClassState extends State<LoginClass> {
     );
   }
 
+  //Styling für Eingabefeld "Passwort"
   Widget _passwordentryField(String title, TextEditingController controller) {
     return TextField(
       controller: controller,
+      //Passwort wird nicht angezeigt
       obscureText: true,
       decoration: InputDecoration(
         labelText: title,
@@ -73,10 +84,12 @@ class _LoginClassState extends State<LoginClass> {
     );
   }
 
+  //Error-MEssages sind von Firebase vorgebeben
   Widget _errorMessage() {
     return Text(errorMessage == '' ? '' : 'Humm ? $errorMessage');
   }
 
+  //Je nach Wert der boolean isLogin wird entweder Login oder Register auf dem Submit Button angezeigt
   Widget _submitButton() {
     return ElevatedButton(
       onPressed:
@@ -90,6 +103,7 @@ class _LoginClassState extends State<LoginClass> {
     );
   }
 
+  //wird auf diesen Button geklickt, wird der Wert der Boolean getauscht und bei true "Register instead" angezeigt
   Widget _loginOrRegisterButton() {
     return TextButton(
       onPressed: () {
@@ -157,6 +171,7 @@ class _LoginClassState extends State<LoginClass> {
           const SizedBox(height: 10),
           SizedBox(
             width: 250,
+            //Aufrufen der einzelnen Widgets von oben
             child: _errorMessage(),
           ),
           _submitButton(),

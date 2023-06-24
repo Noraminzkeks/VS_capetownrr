@@ -4,8 +4,13 @@ import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 import 'buchen.dart';
 import 'index.dart';
+//Shared Preferences speichert in einer Art Zwischenspeicher vom User ausgewählte Einstellungen
 import 'package:shared_preferences/shared_preferences.dart';
 
+//Diese Page wird nicht verwendet!!
+//Ausprobieren der Platzanzahl-Reduktion mit dem Package "Shared Preferences"
+
+//Initalisierung der drei DropDownMenüs
 class MyDropdownMenu extends StatefulWidget {
   @override
   _MyDropdownMenuState createState() => _MyDropdownMenuState();
@@ -20,6 +25,7 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
     'Datum auswählen', '30.07.2023', '03.07.2023', '15.07.2023'];
   int selectedValue1 = 0;
 
+  //lädt die Counter aus dem Zwischenspeicher
   @override
   void initState() {
     super.initState();
@@ -28,6 +34,8 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
     loadCounter3();
   }
 
+  //eine Lade-Funktion für jeden Counter
+  //Future & Async => vor dem Laden müssen Informationen geladen werden
   Future<void> loadSelectedValue1() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -84,12 +92,13 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
     });
   }
 
-  Future<void> decreaseCounter() async {
+  //je "Selected Valaue" also Zeile im Dropdown wird der Counter um eins verringert
+  Future<void> decreaseCounter(int decrease) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     selectedValue1 = prefs.getInt('selectedValue1') ?? 0;
     if(selectedValue1==1){
       int counter1 = prefs.getInt('counter1') ?? 0;
-      counter1 -= 1;
+      counter1 -= decrease;
       prefs.setInt('counter1', counter1);
       setState(() {
         this.counter1 = counter1;
@@ -98,7 +107,7 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
     }
     else if(selectedValue1==2){
       int counter2 = prefs.getInt('counter2') ?? 0;
-      counter2 -= 1;
+      counter2 -= decrease;
       prefs.setInt('counter2', counter2);
       setState(() {
         this.counter2 = counter2;
@@ -107,7 +116,7 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
     }
     else{
       int counter3 = prefs.getInt('counter3') ?? 0;
-      counter3 -= 1;
+      counter3 -= decrease;
       prefs.setInt('counter3', counter3);
       setState(() {
         this.counter3 = counter3;
@@ -133,7 +142,14 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
               padding: const EdgeInsets.all(5),
               width: 300,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Icon(
+                    Icons.date_range_outlined,
+                    color: Colors.black,
+                    size: 25.0,
+                    semanticLabel: 'Datum',
+                  ),
                   Text(option),
                 ],
               ),
@@ -169,7 +185,6 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
   }
 }
 
-
 List<DropdownMenuItem<String>> get dropdownBikes {
   List<DropdownMenuItem<String>> listbike = [
     DropdownMenuItem(
@@ -189,11 +204,11 @@ List<DropdownMenuItem<String>> get dropdownBikes {
             ],
           ),
         ),
-        value: "eins"),
-    DropdownMenuItem(child: Text('1 E-Bike '), value: "zwei"),
-    DropdownMenuItem(child: Text('2 E-Bikes '), value: "drei"),
-    DropdownMenuItem(child: Text('3 E-Bikes '), value: "vier"),
-    DropdownMenuItem(child: Text('4 E-Bikes '), value: "fünf"),
+        value: "0"),
+    DropdownMenuItem(child: Text('1 E-Bike '), value: "1"),
+    DropdownMenuItem(child: Text('2 E-Bikes '), value: "2"),
+    DropdownMenuItem(child: Text('3 E-Bikes '), value: "3"),
+    DropdownMenuItem(child: Text('4 E-Bikes '), value: "4"),
   ];
   return listbike;
 }
@@ -206,7 +221,7 @@ class DropdownButtonBike extends StatefulWidget {
 }
 
 class _DropdownButtonBikeState extends State<DropdownButtonBike> {
-  static String selectedValue2 = "eins";
+  static String selectedValue2 = "0";
 
   @override
   Widget build(BuildContext context) {
@@ -245,11 +260,11 @@ List<DropdownMenuItem<String>> get dropdownKids {
             ],
           ),
         ),
-        value: "eins"),
-    DropdownMenuItem(child: Text('1 E-Bike Kid '), value: "zwei"),
-    DropdownMenuItem(child: Text('2 E-Bikes Kids '), value: "drei"),
-    DropdownMenuItem(child: Text('3 E-Bikes Kids '), value: "vier"),
-    DropdownMenuItem(child: Text('4 E-Bikes Kids '), value: "fünf"),
+        value: "0"),
+    DropdownMenuItem(child: Text('1 E-Bike Kid '), value: "1"),
+    DropdownMenuItem(child: Text('2 E-Bikes Kids '), value: "2"),
+    DropdownMenuItem(child: Text('3 E-Bikes Kids '), value: "3"),
+    DropdownMenuItem(child: Text('4 E-Bikes Kids '), value: "4"),
   ];
   return listKids;
 }
@@ -262,7 +277,7 @@ class DropdownButtonKids extends StatefulWidget {
 }
 
 class _DropdownButtonKidsState extends State<DropdownButtonKids> {
-  static String selectedValue3 = "eins";
+  static String selectedValue3 = "0";
 
   @override
   Widget build(BuildContext context) {
@@ -427,7 +442,8 @@ class _BuchenClassState extends State<BuchenClass> {
                       context,
                       new MaterialPageRoute(builder: (context) => Index())
                   );
-                  _MyDropdownMenuState().decreaseCounter();
+                  int decrease = (_DropdownButtonBikeState.selectedValue2 as int) + (_DropdownButtonKidsState.selectedValue3 as int);
+                  _MyDropdownMenuState().decreaseCounter(decrease);
                 },
                 child: Text('Buchung abschließen'),
                 style: ElevatedButton.styleFrom(

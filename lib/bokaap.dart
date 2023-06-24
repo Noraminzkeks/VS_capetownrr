@@ -1,6 +1,4 @@
 import 'package:caperr/settings.dart';
-
-import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'buchenkaap.dart';
@@ -15,26 +13,27 @@ class BoKaapClass extends StatefulWidget {
 class _BoKaapClassState extends State<BoKaapClass> {
   @override
   Widget build(BuildContext context) {
+    //Absolutes Grundgerüst
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color(0xFFF3B7BC),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                'assets/images/CapeTownRentRide.jpg',
-                fit: BoxFit.contain,
-                height: 30,
+        backgroundColor: const Color(0xFFF3B7BC),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/CapeTownRentRide.jpg',
+              fit: BoxFit.contain,
+              height: 30,
+            ),
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                'Cape Town Rent & Ride',
+                style: TextStyle(color: Colors.white),
               ),
-              Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    'Cape Town Rent & Ride',
-                    style: TextStyle(color: Colors.white),
-                  ),
-              ),
-            ],
-          ),
+            ),
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
@@ -51,13 +50,17 @@ class _BoKaapClassState extends State<BoKaapClass> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            //Bildershow-Package
             ImageSlideshow(
               indicatorColor: const Color(0xFFF3B7BC),
               onPageChanged: (value) {
                 debugPrint('Page changed: $value');
               },
+              //Zeiteinheit
               autoPlayInterval: 5000,
+              //beginnt von vorne
               isLoop: true,
+              //Einbinden der verschiedenen Bilder
               children: [
                 Image.asset(
                   'assets/images/TableHaus.JPEG',
@@ -77,6 +80,8 @@ class _BoKaapClassState extends State<BoKaapClass> {
                 ),
               ],
             ),
+
+            // Icon - Reihe genau unter der Slideshow
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -128,6 +133,8 @@ class _BoKaapClassState extends State<BoKaapClass> {
                   ],
                 ),
                 const SizedBox(width: 50),
+
+                //Sterne-Bewertung
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -210,7 +217,9 @@ class _BoKaapClassState extends State<BoKaapClass> {
                 height: 50,
                 width: 250,
                 child: OutlinedButton(
+                  //Funktion des Buttons
                   onPressed: () {
+                    //Weiterleitung auf BuchenKaapClass
                     Navigator.push(
                       context,
                       MaterialPageRoute(

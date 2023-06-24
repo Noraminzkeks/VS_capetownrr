@@ -1,10 +1,7 @@
 import 'package:caperr/settings.dart';
-
 import 'bokaap.dart';
-import 'main.dart';
 import 'peninsula.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'simonstown.dart';
 
 class TourenClass extends StatefulWidget {
@@ -65,6 +62,7 @@ class _TourenClassState extends State<TourenClass> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                //InkWell erstellt eine clickable Card
                 InkWell(
                   child: Card(
                     elevation: 5,
@@ -135,6 +133,7 @@ class _TourenClassState extends State<TourenClass> {
                       ],
                     ),
                   ),
+                  //Beim Tippen auf die Card wird man weitergeleitet auf die entsprechenden Seiten
                   onTap: () {
                     Navigator.push(
                       context,
