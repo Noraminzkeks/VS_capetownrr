@@ -11,6 +11,7 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index>{
   final _formKey = GlobalKey<FormState>();
 
+  //Aufruf der Navbar mit der Klasse BottomTabBar
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: BottomTabBar(),);

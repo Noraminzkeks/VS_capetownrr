@@ -7,6 +7,7 @@ class Loading extends StatefulWidget {
   _LoadingState createState() => _LoadingState();
 }
 
+// 3 Sekunden Ladezeichen bevor Routing zur "Welcome" Seite
 class _LoadingState extends State<Loading> {
   @override
   void initState() {
@@ -14,9 +15,11 @@ class _LoadingState extends State<Loading> {
     Timer(Duration(seconds: 3), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => Welcome()));
-    });
+    },
+    );
   }
 
+  //Styling Ladebildschirm
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +37,8 @@ class _LoadingState extends State<Loading> {
             ],
           ),
         ),
+
+        // Sich drehender Kreis -> Ladesymbol
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

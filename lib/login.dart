@@ -84,7 +84,7 @@ class _LoginClassState extends State<LoginClass> {
     );
   }
 
-  //Error-MEssages sind von Firebase vorgebeben
+  //Error-Messages sind von Firebase vorgebeben
   Widget _errorMessage() {
     return Text(errorMessage == '' ? '' : 'Humm ? $errorMessage');
   }
@@ -135,7 +135,8 @@ class _LoginClassState extends State<LoginClass> {
                     style: TextStyle(fontFamily: 'Roboto', color: Colors.white),
                   ))
             ],
-          )),
+          ),
+      ),
       body: Center(
         child: SingleChildScrollView(
             child:

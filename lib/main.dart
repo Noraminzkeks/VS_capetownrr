@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 import 'loading.dart';
 import 'login.dart';
 
+// Firebase Anbindung
 Future<void> main() async  {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -21,13 +22,13 @@ Future<void> main() async  {
 
       ),
   );
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   // Hier wird das Widget gebaut, Build Context ist eine Flutter Library
   Widget build(BuildContext context) {

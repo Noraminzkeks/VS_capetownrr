@@ -1,5 +1,4 @@
 import 'package:caperr/main.dart';
-import 'package:caperr/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
 
@@ -15,9 +14,11 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   late Material materialButton;
   late int index;
+
+  //Onboarding Seiten
   final onboardingPagesList = [
 
-    //First Page: Hello
+    //Erste Seite: Willkommen
     PageModel(
       widget: DecoratedBox(
         decoration: BoxDecoration(
@@ -60,7 +61,7 @@ class _WelcomeState extends State<Welcome> {
       ),
     ),
 
-    // Second Page
+    //Zweite Seite: Südafrika
     PageModel(
       widget: DecoratedBox(
         decoration: BoxDecoration(
@@ -105,7 +106,7 @@ class _WelcomeState extends State<Welcome> {
       ),
     ),
 
-    // Third Page
+    //Erste Seite: Wir
     PageModel(
       widget: DecoratedBox(
         decoration: BoxDecoration(
@@ -162,14 +163,16 @@ class _WelcomeState extends State<Welcome> {
   //Skip Button
   Material _skipButton({void Function(int)? setIndex}) {
     return Material(
+      // Styling
       borderRadius: defaultSkipButtonBorderRadius,
       color: Colors.white,
       child: InkWell(
         borderRadius: defaultSkipButtonBorderRadius,
+        //Funktion wenn gedrückt
         onTap: () {
           if (setIndex != null) {
             index = 2;
-            setIndex(2);
+            setIndex(2); //Index wird auf 2 gesetzt -> letzte Seite
           }
         },
 
@@ -186,16 +189,20 @@ class _WelcomeState extends State<Welcome> {
     );
   }
 
+  //Signup Button
   Material get _signupButton {
     return Material(
-      borderRadius: defaultProceedButtonBorderRadius,
+      // Styling
+
+    borderRadius: defaultProceedButtonBorderRadius,
       color: Colors.white,
       child: InkWell(
         borderRadius: defaultProceedButtonBorderRadius,
+        //Funktion wenn gedrückt
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LoginClass()),
+            MaterialPageRoute(builder: (context) => LoginClass()), //Routing zur Login Seite
           );
         },
         child: const Padding(
@@ -221,7 +228,7 @@ class _WelcomeState extends State<Welcome> {
           onPageChange: (int pageIndex) {
             index = pageIndex;
           },
-          startPageIndex: 0,
+          startPageIndex: 0, // Erste Seite
           footerBuilder: (context, dragDistance, pagesLength, setIndex) {
             return DecoratedBox(
               decoration: BoxDecoration(
@@ -232,6 +239,7 @@ class _WelcomeState extends State<Welcome> {
                 ),
               ),
 
+              //Allgemeines Styling der Seiten
               child: ColoredBox(
                 color: Color(0xFFF3B7BC),
                 child: Padding(

@@ -3,7 +3,6 @@ import 'package:caperr/touren.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'contact.dart';
-import 'settings.dart';
 
 class BottomTabBar extends StatefulWidget {
   BottomTabBar({Key? key}) : super(key: key);
@@ -12,6 +11,7 @@ class BottomTabBar extends StatefulWidget {
   State<BottomTabBar> createState() => _BottomTabBarState();
 }
 
+// Auswahl der einzelnen möglichen Seiten
 class _BottomTabBarState extends State<BottomTabBar> {
   int _index = 0;
   final screens = [
@@ -19,6 +19,8 @@ class _BottomTabBarState extends State<BottomTabBar> {
     TourenClass(),
     ContactClass(),
   ];
+
+  // Funktion der Navbar
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +34,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
               });
             },
 
+            // Styling der Navbar
             backgroundColor: Colors.white,
             items: [
               BottomNavigationBarItem(

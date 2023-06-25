@@ -54,6 +54,7 @@ class _ContactClassState extends State<ContactClass> {
             mainAxisSize: MainAxisSize.min,
             children: [
 
+              //Überschrift und Erklärung
               Padding(padding: EdgeInsets.all(3)),
 
               Text('Kontakt',
@@ -85,6 +86,7 @@ class _ContactClassState extends State<ContactClass> {
                   Container(
                     width: 180,
                     height: 200,
+                    //Kundenservice Card
                     child: Card(
                       child: Padding(
                         padding: EdgeInsets.all(10.0),
@@ -143,6 +145,7 @@ class _ContactClassState extends State<ContactClass> {
                   Container(
                     width: 180,
                     height: 200,
+                    //Kontaktformular Card
                     child: Card(
                       child: Padding(
                         padding: EdgeInsets.all(10.0),
@@ -183,6 +186,7 @@ class _ContactClassState extends State<ContactClass> {
                               height: 20,
                             ),
 
+                            //Button um Kontaktformular aufzurufen
                             ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
                                 primary: Color(0xFFF3B7BC),
@@ -193,6 +197,8 @@ class _ContactClassState extends State<ContactClass> {
                                   fontSize: 10,
                                 ),
                               ),
+
+                              //Öffnen eines Pop Up beim Klicken
                               onPressed: () {
                                 showDialog(context: context, builder: (context) => AlertDialog(
                                     title: Text('Kontaktformular'),
@@ -206,6 +212,7 @@ class _ContactClassState extends State<ContactClass> {
 
                                           Text('Bitte fülle alle erforderlichen Felder aus (*).'),
 
+                                          //Formfield: Name
                                           Padding(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                                             child: TextFormField(
                                               decoration: const InputDecoration(
@@ -218,6 +225,7 @@ class _ContactClassState extends State<ContactClass> {
                                             ),
                                           ),
 
+                                        //Formfield: Email
                                           Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                                             child: TextFormField(
@@ -230,6 +238,7 @@ class _ContactClassState extends State<ContactClass> {
                                               ),
                                             ),
                                           ),
+                                        //Formfield: Nachricht
                                           Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                                             child: TextFormField(
@@ -265,10 +274,12 @@ class _ContactClassState extends State<ContactClass> {
                 height: 20,
               ),
 
+              // Einbinden der Map
               Expanded(
                 child: MapClass(),
               ),
 
+              // Addressen Card
               Card(
                 child: Padding(
                   padding: EdgeInsets.all(20.0),
@@ -297,9 +308,7 @@ class _ContactClassState extends State<ContactClass> {
                     ],
                   ),
                 ),
-
               ),
-
             ],
           ),
         ),
